@@ -94,7 +94,7 @@ struct workio_cmd {
 bool opt_debug_diff = false;
 bool opt_debug_threads = false;
 bool opt_showdiff = true;
-bool opt_submit_stale = false;
+bool opt_submit_stale = true;
 bool opt_hwmonitor = true;
 
 const char *algo_names[] =
@@ -401,7 +401,7 @@ static struct option const options[] =
 	{"retries", 1, NULL, 'r'},
 	{"retry-pause", 1, NULL, 'R'},
 	{"scantime", 1, NULL, 's'},
-	{"submit-stale", 0, NULL, 1015 },
+	{"submit-stale", 1, NULL, 1015 },
 	{"statsavg", 1, NULL, 'N'},
 #ifdef HAVE_SYSLOG_H
 	{"syslog", 0, NULL, 'S'},
@@ -733,7 +733,7 @@ static bool submit_upstream_work(CURL *curl, struct work *work)
 			if(!send_stale && strncmp(work->job_id + 8, g_work.job_id + 8, sizeof(g_work.job_id) - 8) != 0)
 				stale_work = true;
 			else
-				stale_work = false;
+				stale_work = true;
 		}
 		if(!send_stale && stale_work)
 		{
@@ -3172,7 +3172,7 @@ static void parse_arg(int key, char *arg)
 		want_stratum = false;
 		break;
 	case 1011:
-		allow_gbt = false;
+		allow_gbt = true;
 		break;
 		case 1015: 
         opt_submit_stale = true; 
