@@ -94,6 +94,7 @@ struct workio_cmd {
 bool opt_debug_diff = false;
 bool opt_debug_threads = false;
 bool opt_showdiff = true;
+bool opt_submit_stale = false;
 bool opt_hwmonitor = true;
 
 const char *algo_names[] =
@@ -319,7 +320,8 @@ Options:\n\
   -R, --retry-pause=N   time to pause between retries, in seconds (default: 30)\n\
   -T, --timeout=N       network timeout, in seconds (default: 270)\n\
   -s, --scantime=N      upper bound on time spent scanning current work when\n\
-                          long polling is unavailable, in seconds (default: 5)\n"
+                          long polling is unavailable, in seconds (default: 5)\n\
+	  --submit-stale    ignore stale jobs checks, may create more rejected shares\n"
 #ifndef ORG
 	"\
       --eco             use eco mode (Lyra2REv2 only)\n\
@@ -399,6 +401,7 @@ static struct option const options[] =
 	{"retries", 1, NULL, 'r'},
 	{"retry-pause", 1, NULL, 'R'},
 	{"scantime", 1, NULL, 's'},
+	{"submit-stale", 0, NULL, 1015 },
 	{"statsavg", 1, NULL, 'N'},
 #ifdef HAVE_SYSLOG_H
 	{"syslog", 0, NULL, 'S'},
@@ -722,7 +725,7 @@ static bool submit_upstream_work(CURL *curl, struct work *work)
 
 	/* discard if a newer block was received */
 	stale_work = !send_stale && (work->height && work->height < g_work.height);
-	if(have_stratum && !stale_work)
+	if (have_stratum && !stale_work && !opt_submit_stale && opt_algo != ALGO_YESCRYPTR32 && opt_algo != ALGO_YESCRYPTR32)
 	{
 		pthread_mutex_lock(&g_work_lock);
 		if(strlen(work->job_id + 8))
@@ -3171,6 +3174,9 @@ static void parse_arg(int key, char *arg)
 	case 1011:
 		allow_gbt = false;
 		break;
+		case 1015: 
+        opt_submit_stale = true; 
+        break;
 	case 'S':
 	case 1008:
 		applog(LOG_INFO, "Now logging to syslog...");
