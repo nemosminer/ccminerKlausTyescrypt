@@ -14,7 +14,7 @@ Reforked and optimized by sp-hash@github and KlausT@github
 
 A part of the recent algos were originally written by [djm34](https://github.com/djm34).
 
-This variant was tested and built with Visual Studio 2015 on Windows 10
+This variant was tested and built with Visual Studio 2017 v141 tools Windows 10 & cuda 10.0
 
 ## Source code dependencies
 
