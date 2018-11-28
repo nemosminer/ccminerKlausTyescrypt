@@ -156,7 +156,7 @@
 #define PACKAGE_NAME "ccminer"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "ccminer Yescrypt/R16/R32.V9"
+#define PACKAGE_STRING "ccminer Yescrypt/R16/R32.V10"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "ccminer"
@@ -165,7 +165,7 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "Yescrypt/R16/R32.V9"
+#define PACKAGE_VERSION "Yescrypt/R16/R32.V10"
 
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
