@@ -56,7 +56,7 @@ BOOL WINAPI ConsoleHandler(DWORD);
 #endif
 
 #define PROGRAM_NAME		"ccminer"
-#define LP_SCANTIME		25
+#define LP_SCANTIME		10
 #define MNR_BLKHDR_SZ 80
 
 double expectedblocktime(const uint32_t *target);
@@ -154,7 +154,7 @@ bool have_stratum = false;
 bool allow_gbt = true;
 bool allow_mininginfo = true;
 bool check_dups = false;
-static bool submit_old = false;
+static bool submit_old = true;
 bool use_syslog = false;
 bool use_colors = true;
 static bool opt_background = false;
@@ -162,7 +162,7 @@ bool opt_quiet = false;
 static int opt_retries = -1;
 static int opt_fail_pause = 20;
 int opt_timeout = 120;
-static int opt_scantime = 25;
+static int opt_scantime = 10;
 static json_t *opt_config = nullptr;
 static const bool opt_time = true;
 enum sha_algos opt_algo = ALGO_INVALID;
